@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core'
 import { UserService } from '../user/user.service';
 import { Socket } from 'ng-socket-io';
 import { GameService } from './game.service';
-import { Board, User } from '../../../src_server/socketServer'
+import { Board, User, Choice } from '../../../src_server/socketServer'
 
 @Component({
   selector: 'game-field',
@@ -43,9 +43,12 @@ export class GameComponent implements OnInit {
     this.userService.getUsers.subscribe(users => {
       this.users = users;
     });
+    this.gameService.getBoard.subscribe(board => {
+      this.field = board;
+    });
   }
 
-  choiceClick(x, y) {
+  choiceClick(x: number, y: number) {
     this.gameService.choice(x, y);
   }
 }

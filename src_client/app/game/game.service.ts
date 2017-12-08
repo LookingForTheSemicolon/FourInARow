@@ -5,47 +5,34 @@ import { UserService } from 'app/user/user.service';
 import { User } from '../../../src_server/socketServer'
 import { Choice } from '../../../src_server/socketServer'
 
-
-interface Bla {
-    name: string;
-    color: string;
-}
-
 @Injectable()
 export class GameService {
 
+  @Output()
+  getBoard: EventEmitter<Board> = new EventEmitter<Board>();
+
   public board: Board;
-  public row;
-  public column;
-  public player1: User;
-  public player2: User;
-  public currentPlayer: User;
+  public row: number;
+  public column: number;
+  public player1: string;
+  public player2: string;
+  public currentPlayer: string;
 
   constructor(private socket: Socket, private userService: UserService) {
     this.socket.on('players', (data) => {
       this.player1 = data.set.player1;
       this.player2 = data.set.player2
-      this.currentPlayer = this.player1;
+      this.currentPlayer = data.set.currentPlayer;
     });
 
-    this.socket.on('updatedBoard', (data: Board) => {
-      this.board.gameArray = data.gameArray;
-    });
-
-    this.socket.on('playersChoice', (data: Choice) => {
-        if (this.userService.actUser.username === this.player1.username) {
-          this.board.gameArray[data.set.row][data.set.column] = 1;
-        } else {
-          this.board.gameArray[data.set.row][data.set.column] = 2;
-        }
-      this.currentPlayer.username = data.set.currentPlayer;
-      this.socket.emit('board', this.board);
+    this.socket.on('update', (data) => {
+      this.currentPlayer = data.set.currentPlayer;
       this.switchPlayer(this.currentPlayer);
-
+      this.getBoard.next(data.set.board);
     });
   }
 
-  switchPlayer(currentPlayer) {
+  switchPlayer(currentPlayer: string) {
     if (this.currentPlayer === this.player1) {
       this.currentPlayer = this.player2;
     } else if (this.currentPlayer === this.player2) {
@@ -53,10 +40,10 @@ export class GameService {
     }
   }
 
-  choice(x, y) {
-    if (this.userService.actUser.username === this.currentPlayer.username) {
+  choice(x: number, y: number) {
+    if (this.userService.actUser.username === this.currentPlayer) {
       this.socket.emit('choice', {
-        set: { username: this.currentPlayer.username, row: x, column: y }
+        set: { currentPlayer: this.currentPlayer, row: x, column: y }
       });
     }
   }
