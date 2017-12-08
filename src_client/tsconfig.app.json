@@ -1,0 +1,17 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "../out-tsc/client-app",
+    "module": "es2015",
+    "baseUrl": "",
+    "types": []
+  },
+  "include": [
+      "../node_modules/ng-socket-io",
+      "../src_client/**/*"
+  ],
+  "exclude": [
+    "test.ts",
+    "**/*.spec.ts"
+  ]
+}

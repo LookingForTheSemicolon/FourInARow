@@ -1,0 +1,62 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+}
+.container-item {
+  max-width: 50%;
+  vertical-align: bottom;
+
+}
+.container-item-dialog {
+  width: 100%;
+  height: 100px;
+  flex: 0 0 auto;
+  flex-direction: row;
+  display: flex;
+  border: 2px solid grey;
+}
+
+.container-item-dialog .item-textarea {
+  flex: 1 1 auto;
+  overflow-x: scroll;
+  overflow-y: scroll;
+}
+
+.container-item-dialog .item-userList {
+  flex: 0 0 auto;
+  border-left: 2px solid grey;
+}
+
+.container-item-input {
+  flex: 0 0 auto;
+  flex-direction: row;
+  display: flex;
+  margin-bottom: 30px;
+  border: 2px solid grey;
+}
+
+.container-item-dialog {
+  flex: 0 0 auto;
+  flex-direction: row;
+  display: flex;
+  border-bottom: none;
+  border-top: 2px solid grey;
+  border-right: 2px solid grey;
+  border-left: 2px solid grey;
+}
+
+.container-item-input input {
+  flex: 1 1 auto;
+}
+.container-item-input button {
+  flex: 0 0 124.3px;
+}
+
+.container-item-dialog .item-textarea {
+  flex: 1 1 auto;
+}
+.container-item-dialog .item-userList {
+  flex: 0 0 124.3px;
+}

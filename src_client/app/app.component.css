@@ -1,0 +1,30 @@
+app-root {
+  height: 100%;
+}
+
+.header {
+  text-align:center
+}
+
+.bottom {
+  margin-top: auto;
+}
+
+game-field {
+  display: flex;
+  flex: 1 1 auto;
+  align-content: center;
+  width: 100%;
+  padding: 50%;
+}
+
+login-form {
+  flex: 0 0 auto;
+
+}
+
+chat-dialog {
+  flex: 0 0 auto;
+  width: 100%;
+
+}
